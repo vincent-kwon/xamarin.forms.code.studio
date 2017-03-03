@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Command.Add</Title>
+      <Author>DESKTOP-T2ILVC6</Author>
+      <Description />
+      <HelpUrl></HelpUrl>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Keywords>
+        <Keyword></Keyword>
+      </Keywords>
+      <Shortcut />
+    </Header>
+    <Snippet>
+      <References />
+      <Imports />
+      <Declarations />
+      <Code Language="CSharp" Kind="method body" Delimiter="$"><![CDATA[public static readonly BindableProperty CommandProperty = BindableProperty.Create("Command", typeof(ICommand), typeof(AlarmEditTableCell));
+
+public ICommand Command
+{
+    get { return (ICommand)GetValue(CommandProperty); }
+    set { SetValue(CommandProperty, value); }
+}
+
+Command = new Command(async (o) =>
+{
+    /// callback to command
+});
+
+if (Command != null && Command.CanExecute(null))
+{
+    Command.Execute(o_args);
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

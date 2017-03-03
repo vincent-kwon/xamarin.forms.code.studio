@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Style.Add</Title>
+      <Author>DESKTOP-T2ILVC6</Author>
+      <Description />
+      <HelpUrl></HelpUrl>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Keywords>
+        <Keyword></Keyword>
+      </Keywords>
+      <Shortcut />
+    </Header>
+    <Snippet>
+      <References />
+      <Imports />
+      <Declarations />
+      <Code Language="CSharp" Kind="method body" Delimiter="$"><![CDATA[class StyleGroup
+{
+    internal static Style ATO001 = new Style(typeof(Label))
+    {
+        Setters =
+        {
+            new Setter { Property = Label.HeightRequestProperty, Value = 93 },
+            new Setter { Property = Label.FontSizeProperty, Value = CommonStyle.GetDp(70) },
+            new Setter { Property = Label.TextColorProperty, Value = Color.FromHex("FF000000") },
+            new Setter { Property = Label.HorizontalOptionsProperty, Value = LayoutOptions.Start },
+            new Setter { Property = Label.HorizontalTextAlignmentProperty, Value = TextAlignment.Start },
+            new Setter { Property = Label.VerticalTextAlignmentProperty, Value = TextAlignment.Center },
+        }
+    };
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
