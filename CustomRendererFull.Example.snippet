@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>CustomRendererFull.Example</Title>
+      <Author>DESKTOP-7I0PTHF</Author>
+      <Description />
+      <HelpUrl></HelpUrl>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Keywords>
+        <Keyword></Keyword>
+      </Keywords>
+      <Shortcut />
+    </Header>
+    <Snippet>
+      <References />
+      <Imports />
+      <Declarations />
+      <Code Language="CSharp" Kind="method body" Delimiter="$"><![CDATA[[assembly: ExportRenderer(typeof(SketchView /* forms element */), typeof(SketchViewRenderer /* forms renderer */))]
+namespace XFDraw.Droid
+{
+    class SketchViewRenderer : ViewRenderer<SketchView /* forms element */, PaintView /* native control */> 
+    {
+        protected override void OnElementChanged(ElementChangedEventArgs<SketchView> e)
+        {
+            base.OnElementChanged(e);
+
+            if (Control == null) // better check here
+            {
+                var paintView = new PaintView(Forms.Context);
+                paintView.SetInkColor(Element.InkColor.ToAndroid());
+                SetNativeControl(paintView);
+            }
+        }
+
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+
+            if (e.PropertyName == SketchView.InkColorProperty.PropertyName) // only if bindable property is changed
+            {
+                Control.SetInkColor(Element.InkColor.ToAndroid()); // do native change
+            }
+        }
+    }
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
