@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>MVVM.Example.Full</Title>
+      <Author>DESKTOP-7I0PTHF</Author>
+      <Description />
+      <HelpUrl></HelpUrl>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Keywords>
+        <Keyword></Keyword>
+      </Keywords>
+      <Shortcut />
+    </Header>
+    <Snippet>
+      <References />
+      <Imports />
+      <Declarations />
+      <Code Language="CSharp" Kind="method body" Delimiter="$"><![CDATA[    public abstract class ExtendedBindableObject : BindableObject
+    {
+public void RaisePropertyChanged<T>(Expression<Func<T>> property)
+{
+    var name = GetMemberInfo(property).Name;
+    OnPropertyChanged(name);
+}
+
+private MemberInfo GetMemberInfo(Expression expression)
+{
+    MemberExpression operand;
+    LambdaExpression lambdaExpression = (LambdaExpression)expression;
+    if (lambdaExpression.Body as UnaryExpression != null)
+    {
+        UnaryExpression body = (UnaryExpression)lambdaExpression.Body;
+        operand = (MemberExpression)body.Operand;
+    }
+    else
+    {
+        operand = (MemberExpression)lambdaExpression.Body;
+    }
+    return operand.Member;
+}
+}
+
+protected readonly IDialogService DialogService;
+protected readonly INavigationService NavigationService;
+
+public abstract class ViewModelBase : ExtendedBindableObject
+{
+    public ViewModelBase()
+    {
+        DialogService = ViewModelLocator.Instance.Resolve<IDialogService>();
+        NavigationService = ViewModelLocator.Instance.Resolve<INavigationService>();
+    }
+}
+ 
+public class BookingViewModel : ViewModelBase
+{
+    private Booking _booking;
+
+    public Booking Booking
+    {
+        get
+        {
+            return _booking;
+        }
+
+        set
+        {
+            _booking = value;
+            RaisePropertyChanged(() => Booking);
+        }
+    }
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
